@@ -18,7 +18,7 @@ contract AttestationRegistry {
 		uint256 challengeTime,
 		string memory description
 	) public {
-		require(attestor != address(0) && challengeTime >= end);
+		require(attestor != address(0) && start <= end && end <= challengeTime);
 		address creator = msg.sender;
 		IAttestationStruct.Attestation memory attestation = IAttestationStruct
 			.Attestation(
@@ -29,8 +29,7 @@ contract AttestationRegistry {
 				end,
 				challengeTime,
 				description,
-				creator,
-				false
+				creator
 			);
 
 		attestationArray.push(attestation);
@@ -41,5 +40,13 @@ contract AttestationRegistry {
 		uint256 id
 	) external view returns (IAttestationStruct.Attestation memory) {
 		return attestationArray[id];
+	}
+
+	function getAllAttestation()
+		external
+		view
+		returns (IAttestationStruct.Attestation[] memory)
+	{
+		return attestationArray;
 	}
 }

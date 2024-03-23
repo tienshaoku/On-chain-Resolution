@@ -44,7 +44,7 @@ export const Footer = () => {
               <a href="https://scaffoldeth.io/" target="_blank" rel="noreferrer" className="link">
                 Scaffold-OP 🏗 🔴
               </a>
-              {" and all FE credit goes to them 🥹"}
+              {" and all FE credit goes to them 🎉"}
             </div>
           </div>
         </ul>
