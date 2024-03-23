@@ -9,10 +9,10 @@ import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 contract MerkleTreeAttestor {
 	uint256 attestationId;
 	address attestationRegistry;
-	address erc20;
-	uint256 downPayment;
-	uint256 totalDeposit;
-	bytes32 merkleRoot;
+	address public erc20;
+	uint256 public downPayment;
+	uint256 public totalDeposit;
+	bytes32 public merkleRoot;
 
 	mapping(address => User) public userMap;
 

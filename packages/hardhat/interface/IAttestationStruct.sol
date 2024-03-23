@@ -8,7 +8,6 @@ interface IAttestationStruct {
 		uint256 registration;
 		uint256 start;
 		uint256 end;
-		uint256 challengeTime;
 		string description;
 		address creator;
 		string creatorNickname;

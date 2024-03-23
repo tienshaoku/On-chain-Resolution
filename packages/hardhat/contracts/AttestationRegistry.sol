@@ -15,11 +15,12 @@ contract AttestationRegistry {
 		uint256 registration,
 		uint256 start,
 		uint256 end,
-		uint256 challengeTime,
 		string memory description,
 		string memory nickname
 	) public {
-		require(attestor != address(0) && start <= end && end <= challengeTime);
+		require(
+			attestor != address(0) && registration <= start && start <= end
+		);
 		address creator = msg.sender;
 		IAttestationStruct.Attestation memory attestation = IAttestationStruct
 			.Attestation(
@@ -28,7 +29,6 @@ contract AttestationRegistry {
 				registration,
 				start,
 				end,
-				challengeTime,
 				description,
 				creator,
 				nickname
