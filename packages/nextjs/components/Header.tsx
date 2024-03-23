@@ -17,6 +17,10 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/",
   },
   {
+    label: "Resolutions",
+    href: "/registry",
+  },
+  {
     label: "Tools",
     href: "/debug",
     icon: "🛠️",

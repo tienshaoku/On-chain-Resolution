@@ -33,7 +33,7 @@ const register: DeployFunction = async function (hre: HardhatRuntimeEnvironment)
     100,
     100,
     100,
-    "Quit Twitter in 3 weeks! 🔥",
+    "Quit Twitter in 3 weeks!",
     "ShitcoinTraderJoe",
   );
 
@@ -42,7 +42,7 @@ const register: DeployFunction = async function (hre: HardhatRuntimeEnvironment)
     100,
     100,
     100,
-    "Donate to EF for no reason 🤔",
+    "Donate to EF for no reason",
     "FinaciallyFreeAlice",
   );
 };

@@ -7,8 +7,8 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
 contract MerkleTreeAttestor {
-	uint256 attestationId;
-	address attestationRegistry;
+	uint256 public attestationId;
+	address public attestationRegistry;
 	address public erc20;
 	uint256 public downPayment;
 	uint256 public totalDeposit;
@@ -39,8 +39,9 @@ contract MerkleTreeAttestor {
 			attestationRegistry
 		).getAttestationById(attestationId);
 		require(
-			block.timestamp >= attestation.registration &&
-				block.timestamp <= attestation.start
+			// block.timestamp >= attestation.registration &&
+			// 	block.timestamp <= attestation.start
+			block.timestamp >= attestation.registration
 		);
 		address userAddr = msg.sender;
 		require(
