@@ -6,4 +6,3 @@ export * from "./FaucetButton";
 export * from "./Input";
 export * from "./RainbowKitCustomConnectButton";
 export * from "./SuperchainFaucetButton";
-export * from "./DappConsoleButton";

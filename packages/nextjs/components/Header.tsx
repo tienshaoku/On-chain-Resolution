@@ -6,12 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import sunny from "./assets/sunny.svg";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
-import {
-  DappConsoleButton,
-  FaucetButton,
-  RainbowKitCustomConnectButton,
-  SuperchainFaucetButton,
-} from "~~/components/scaffold-eth";
+import { FaucetButton, RainbowKitCustomConnectButton, SuperchainFaucetButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 
 type HeaderMenuLink = {
@@ -111,7 +106,6 @@ export const Header = () => {
         <RainbowKitCustomConnectButton />
         <FaucetButton />
         <SuperchainFaucetButton />
-        <DappConsoleButton />
       </div>
     </div>
   );
