@@ -16,7 +16,8 @@ contract AttestationRegistry {
 		uint256 start,
 		uint256 end,
 		uint256 challengeTime,
-		string memory description
+		string memory description,
+		string memory nickname
 	) public {
 		require(attestor != address(0) && start <= end && end <= challengeTime);
 		address creator = msg.sender;
@@ -29,7 +30,8 @@ contract AttestationRegistry {
 				end,
 				challengeTime,
 				description,
-				creator
+				creator,
+				nickname
 			);
 
 		attestationArray.push(attestation);

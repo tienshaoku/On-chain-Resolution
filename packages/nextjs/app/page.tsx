@@ -2,12 +2,14 @@
 
 import Link from "next/link";
 import type { NextPage } from "next";
-
-// import { useAccount } from "wagmi";
-// import { Address } from "~~/components/scaffold-eth";
+import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
 const Home: NextPage = () => {
-  // const { address: connectedAddress } = useAccount();
+  const { data: result } = useScaffoldContractRead({
+    contractName: "AttestationRegistry",
+    functionName: "getAllAttestation",
+    args: undefined,
+  });
 
   return (
     <>
@@ -39,21 +41,20 @@ const Home: NextPage = () => {
           <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
             <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
               <p>
-                Declare your{" "}
                 <Link href="/debug" passHref className="link">
-                  New Goal
+                  Declare your New Goal now!
                 </Link>{" "}
-                now! 🚀
+                🚀
               </p>
             </div>
             <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <p>
-                Explore{" "}
-                <Link href="/blockexplorer" passHref className="link">
-                  {"other people's goals"}
-                </Link>{" "}
-                👀
-              </p>
+              {"Explore other people's goals 👇"}
+              {result?.map((data, i) => (
+                <div key={i}>
+                  <span>{`"${data.description}" by `}</span>
+                  <span className="italic">{data.creatorNickname}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

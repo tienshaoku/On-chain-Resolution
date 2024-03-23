@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
+import usdcIcon from "../../../components/assets/usd-icon.png";
 import { useLocalStorage } from "usehooks-ts";
 import { BarsArrowUpIcon } from "@heroicons/react/20/solid";
 import { ContractUI } from "~~/app/debug/_components/contract";
@@ -43,6 +45,7 @@ export function DebugContracts() {
                   key={contractName}
                   onClick={() => setSelectedContract(contractName)}
                 >
+                  {contractName === "USDC" && <Image alt="USDC Icon" src={usdcIcon} width={20} height={20} />}
                   {contractName}
                   {contractsData[contractName].external && (
                     <span className="tooltip tooltip-top tooltip-accent" data-tip="External contract">

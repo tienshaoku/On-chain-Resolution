@@ -11,5 +11,6 @@ interface IAttestationStruct {
 		uint256 challengeTime;
 		string description;
 		address creator;
+		string creatorNickname;
 	}
 }

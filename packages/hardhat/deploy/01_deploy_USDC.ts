@@ -34,7 +34,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
 
   const mintTo = "0x43bd90E4CC93D6E40580507102Cc7B1Bc8A25284";
   const usdc = await hre.ethers.getContract<Contract>("USDC", deployer);
-  await usdc.mint(mintTo, 10000000);
+  await usdc.mint(mintTo, 100000000);
 };
 
 export default deployYourContract;
