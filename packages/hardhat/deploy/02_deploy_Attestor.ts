@@ -23,13 +23,17 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   const { deploy } = hre.deployments;
 
   // Get the deployed contract to interact with it after deploying.
-  const usdc = await hre.ethers.getContract<Contract>("USDC", deployer);
+  const usdcAddr = await (await hre.ethers.getContract<Contract>("USDC", deployer)).getAddress();
+
+  const attestationRegistryAddr = await (
+    await hre.ethers.getContract<Contract>("AttestationRegistry", deployer)
+  ).getAddress();
 
   // remember to await for getAddress() on usdc
   await deploy("Attestor", {
     from: deployer,
     // Contract constructor arguments
-    args: [await usdc.getAddress(), 1000000],
+    args: [attestationRegistryAddr, usdcAddr, 1000000],
     log: true,
     // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
     // automatically mining the contract deployment transaction. There is no effect on live networks.

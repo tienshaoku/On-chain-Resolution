@@ -1,5 +1,6 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
+import { Contract } from "ethers";
 
 /**
  * Deploys a contract named "YourContract" using the deployer account and
@@ -30,6 +31,10 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
     // automatically mining the contract deployment transaction. There is no effect on live networks.
     autoMine: true,
   });
+
+  const mintTo = "0x43bd90E4CC93D6E40580507102Cc7B1Bc8A25284";
+  const usdc = await hre.ethers.getContract<Contract>("USDC", deployer);
+  await usdc.mint(mintTo, 10000000);
 };
 
 export default deployYourContract;

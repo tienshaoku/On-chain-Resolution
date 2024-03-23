@@ -7,6 +7,7 @@ import { ContractUI } from "~~/app/debug/_components/contract";
 import { ContractName } from "~~/utils/scaffold-eth/contract";
 import { getAllContracts } from "~~/utils/scaffold-eth/contractsData";
 
+// TODO: to contribute
 const selectedContractStorageKey = "";
 const contractsData = getAllContracts();
 const contractNames = Object.keys(contractsData) as ContractName[];

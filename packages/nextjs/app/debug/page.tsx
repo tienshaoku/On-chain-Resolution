@@ -7,6 +7,7 @@ export const metadata = getMetadata({
   description: "Debug your deployed 🏗 Scaffold-OP contracts in an easy way",
 });
 
+// the bigger footer of the Debug Contracts page
 const Debug: NextPage = () => {
   return (
     <>
