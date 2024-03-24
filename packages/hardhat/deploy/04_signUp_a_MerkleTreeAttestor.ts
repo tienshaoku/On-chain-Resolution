@@ -21,7 +21,11 @@ const merkleTreeAttestor: DeployFunction = async function (hre: HardhatRuntimeEn
   */
   const { deployer } = await hre.getNamedAccounts();
 
-  const merkleTreeAttestor = await await hre.ethers.getContract<Contract>("MerkleTreeAttestor", deployer);
+  const merkleTreeAttestor = await hre.ethers.getContract<Contract>("MerkleTreeAttestor", deployer);
+  const usdc = await hre.ethers.getContract<Contract>("USDC", deployer);
+  const balance = await usdc.balanceOf(deployer);
+  await usdc.approve(await merkleTreeAttestor.getAddress(), balance);
+
   await merkleTreeAttestor.signUp();
 
   await merkleTreeAttestor.updateCurrentAttestationId(1);

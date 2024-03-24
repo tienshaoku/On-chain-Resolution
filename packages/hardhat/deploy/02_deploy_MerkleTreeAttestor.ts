@@ -33,8 +33,12 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   await deploy("MerkleTreeAttestor", {
     from: deployer,
     // Contract constructor arguments
-    // TODO: change back to 1 USDC cost
-    args: [attestationRegistryAddr, usdcAddr, 0, "0x3fd0f248e71ec3b5269842a46a4f850d5d77f27efcb98d23635a353b7004ffbd"],
+    args: [
+      attestationRegistryAddr,
+      usdcAddr,
+      1000000,
+      "0x3fd0f248e71ec3b5269842a46a4f850d5d77f27efcb98d23635a353b7004ffbd",
+    ],
     log: true,
     // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
     // automatically mining the contract deployment transaction. There is no effect on live networks.
