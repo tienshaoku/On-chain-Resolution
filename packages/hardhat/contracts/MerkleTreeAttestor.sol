@@ -40,9 +40,8 @@ contract MerkleTreeAttestor {
 			attestationRegistry
 		).getAttestationById(attestationId);
 		require(
-			// block.timestamp >= attestation.registration &&
-			// 	block.timestamp <= attestation.start
-			block.timestamp >= attestation.registration
+			block.timestamp >= attestation.registration &&
+				block.timestamp <= attestation.start
 		);
 		address userAddr = msg.sender;
 		require(
