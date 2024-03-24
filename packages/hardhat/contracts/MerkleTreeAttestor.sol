@@ -18,6 +18,7 @@ contract MerkleTreeAttestor {
 
 	struct User {
 		address addr;
+		uint256 attestationId;
 		uint256 amount;
 		bool result;
 	}
@@ -50,7 +51,7 @@ contract MerkleTreeAttestor {
 		);
 
 		totalDeposit += downPayment;
-		userMap[userAddr] = User(userAddr, downPayment, false);
+		userMap[userAddr] = User(userAddr, attestationId, downPayment, false);
 	}
 
 	function attest(

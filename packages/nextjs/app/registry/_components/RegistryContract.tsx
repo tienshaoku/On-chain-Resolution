@@ -6,7 +6,7 @@ import { useAccount } from "wagmi";
 // import { ContractReadMethods } from "~~/app/debug/_components/contract/ContractReadMethods";
 // import { ContractVariables } from "~~/app/debug/_components/contract/ContractVariables";
 import { Address, Balance } from "~~/components/scaffold-eth";
-import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
+import { useScaffoldContractRead, useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 
@@ -19,19 +19,34 @@ export function RegistryContract() {
     args: [address],
   });
 
+  const { data: registryResult1 } = useScaffoldContractRead({
+    contractName: "AttestationRegistry",
+    functionName: "getAttestationById",
+    args: [userMapResult?.[1]],
+  });
+
   const { data: attestationIdResult } = useScaffoldContractRead({
     contractName: "MerkleTreeAttestor",
     functionName: "attestationId",
     args: undefined,
   });
 
-  const { data: registryResult } = useScaffoldContractRead({
+  const { data: registryResult2 } = useScaffoldContractRead({
     contractName: "AttestationRegistry",
     functionName: "getAttestationById",
     args: [attestationIdResult],
   });
 
-  console.log(registryResult);
+  const data = useScaffoldContractWrite({
+    contractName: "MerkleTreeAttestor",
+    functionName: "signUp",
+    args: undefined,
+    value: undefined,
+    blockConfirmations: 1,
+    onBlockConfirmation: txnReceipt => {
+      console.log("Transaction blockHash", txnReceipt.blockHash);
+    },
+  });
 
   return (
     <div className="flex flex-col gap-y-6 lg:gap-y-8 py-8 lg:py-12 justify-center items-center">
@@ -59,8 +74,8 @@ export function RegistryContract() {
                   <p className="text-md mt-14">No history yet!</p>
                 ) : (
                   <div className="flex flex-col gap-1 items-center">
-                    <div className="text-sm">Attestation Id: {Number(registryResult?.id)}</div>
-                    <div className="text-sm">Topic: {registryResult?.description}</div>
+                    <div className="text-sm">Attestation Id: {Number(registryResult1?.id)}</div>
+                    <div className="text-sm">Topic: {registryResult1?.description}</div>
                   </div>
                 )}
               </div>
@@ -69,29 +84,27 @@ export function RegistryContract() {
           <div className="col-span-1 lg:col-span-2 flex flex-col gap-6">
             <div className="z-10">
               <div className="bg-base-100 rounded-3xl shadow-md shadow-secondary border border-base-300 flex flex-col mt-10 relative">
-                <div className="h-[5rem] w-[5.5rem] bg-base-300 absolute self-start rounded-[22px] -top-[38px] -left-[1px] -z-10 py-[0.65rem] shadow-lg shadow-base-300">
+                <div className="h-[7rem] w-[18rem] bg-base-300 absolute self-start rounded-[22px] -top-[38px] -left-[1px] -z-10 py-[0.65rem] shadow-lg shadow-base-300">
                   <div className="flex items-center justify-center space-x-2">
-                    <p className="my-0 text-sm">Read</p>
+                    <p className="my-0 text-md font-bold">Explore & Join Open Resolutions!</p>
                   </div>
                 </div>
-                {/* <div className="p-5 divide-y divide-base-300">
-                <ContractReadMethods deployedContractData={deployedContractData} />
-              </div> */}
-              </div>
-            </div>
-            <div className="z-10">
-              <div className="bg-base-100 rounded-3xl shadow-md shadow-secondary border border-base-300 flex flex-col mt-10 relative">
-                <div className="h-[5rem] w-[5.5rem] bg-base-300 absolute self-start rounded-[22px] -top-[38px] -left-[1px] -z-10 py-[0.65rem] shadow-lg shadow-base-300">
-                  <div className="flex items-center justify-center space-x-2">
-                    <p className="my-0 text-sm">Write</p>
-                  </div>
+                <div className="p-5 divide-y divide-base-300">
+                  {
+                    <div className="flex flex-col gap-1 relative">
+                      <div>
+                        <div>Attestation Id: {Number(registryResult2?.id)}</div>
+                        <div>Topic: {registryResult2?.description}</div>
+                      </div>
+                      <button
+                        className="btn btn-secondary btn-sm absolute top-1/2 transform -translate-y-1/2 right-0"
+                        onClick={() => data.writeAsync()}
+                      >
+                        SignUp
+                      </button>
+                    </div>
+                  }
                 </div>
-                {/* <div className="p-5 divide-y divide-base-300">
-                <ContractWriteMethods
-                  deployedContractData={deployedContractData}
-                  onChange={triggerRefreshDisplayVariables}
-                />
-              </div> */}
               </div>
             </div>
           </div>

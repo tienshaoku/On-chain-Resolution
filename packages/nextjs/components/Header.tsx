@@ -1,8 +1,10 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import githubIcon from "./assets/github-icon.png";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 
 type HeaderMenuLink = {
@@ -64,7 +66,7 @@ export const Header = () => {
           <div className="flex relative">🫡</div>
           <div className="flex flex-col">
             <span className="font-bold leading-tight">On-chain Resolution</span>
-            <span className="text-xs">Attest and Settle On 📦 🔗</span>
+            <span className="text-xs">Attest and Settle On-chain</span>
           </div>
         </Link>
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">
@@ -74,6 +76,13 @@ export const Header = () => {
       <div className="navbar-end flex-grow mr-4">
         <RainbowKitCustomConnectButton />
         <FaucetButton />
+        <a
+          className="btn btn-primary bg-transparent border-transparent m-2"
+          href="https://github.com/tienshaoku/On-chain-Resolution"
+          target="_blank"
+        >
+          <Image src={githubIcon} alt="Icon" width={15} height={15} />
+        </a>
       </div>
     </div>
   );

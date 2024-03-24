@@ -41,7 +41,7 @@ const Home: NextPage = () => {
           <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
             <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
               <p>
-                <Link href="/debug" passHref className="link">
+                <Link href="/registry" passHref className="link">
                   Declare your New Goal now!
                 </Link>{" "}
                 🚀

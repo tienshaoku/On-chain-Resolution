@@ -8,7 +8,7 @@ import { Contract } from "ethers";
  *
  * @param hre HardhatRuntimeEnvironment object.
  */
-const register: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
+const merkleTreeAttestor: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   /*
     On localhost, the deployer account is the one that comes with Hardhat, which is already funded.
 
@@ -21,34 +21,14 @@ const register: DeployFunction = async function (hre: HardhatRuntimeEnvironment)
   */
   const { deployer } = await hre.getNamedAccounts();
 
-  const merkleTreeAttestorAddr = await (
-    await hre.ethers.getContract<Contract>("MerkleTreeAttestor", deployer)
-  ).getAddress();
+  const merkleTreeAttestor = await await hre.ethers.getContract<Contract>("MerkleTreeAttestor", deployer);
+  await merkleTreeAttestor.signUp();
 
-  // Get the deployed contract to interact with it after deploying.
-  const attestationRegistry = await hre.ethers.getContract<Contract>("AttestationRegistry", deployer);
-
-  await attestationRegistry.register(
-    merkleTreeAttestorAddr,
-    100,
-    100,
-    100,
-    "Quit Twitter in 3 weeks!",
-    "ShitcoinTraderJoe",
-  );
-
-  await attestationRegistry.register(
-    "0x0000000000000000000000000000000000000001",
-    100,
-    100,
-    100,
-    "Donate to EF for no reason",
-    "FinaciallyFreeAlice",
-  );
+  await merkleTreeAttestor.updateCurrentAttestationId(1);
 };
 
-export default register;
+export default merkleTreeAttestor;
 
 // Tags are useful if you have multiple deploy files and only want to run one of them.
 // e.g. yarn deploy --tags YourContract
-register.tags = ["RegisterAttestation"];
+merkleTreeAttestor.tags = ["SignUpMerkleTreeAttestor"];
